@@ -8,3 +8,4 @@ int main(){
     delete_ArrayList(l);
    
 }
+//Se eseguo questo con g++... ecc  mi stampa 5 zeri
