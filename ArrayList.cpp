@@ -21,15 +21,15 @@ void delete_ArrayList(list &l){
     delete l;
 }
 void pushback_ArrayList(list &l,int x){
-    l->lenght++;
     if (l->lenght > l->capacity){
         std::string err;
         throw err;
     }
-    int i = 0;
-    while(i < l->lenght - 1)
-        i++;
-    l->a[i] = x;
+    l->lenght++;
+  //  int i = 0;
+ //   while(i < l->lenght - 1)
+    //    i++;
+    l->a[l->lenght-1] = x;
     return;
 }
 
@@ -38,24 +38,24 @@ int popback(list &l){
         std::string err; 
         throw err;
     }
-    int i = 0;
-    while(i < l->lenght - 1)
-        i++;
-    int x = l->a[i];
+   // int i = 0;
+ //   while(i < l->lenght - 1)
+       // i++;
+    int x = l->a[l->lenght-1];
     l->lenght --;
     return x;
 }
 list ArrayList_copy(list &A){
     if(A->lenght == 0)
-        return ArrayList_new(0);
+        return ArrayList_new(A->capacity);
 
-    list C=ArrayList_new(A->lenght);
+    list C=ArrayList_new(A->capacity);
         for (int i=0; i< A->lenght; i++)
             C->a[i] = A->a[i];
-        C->lenght = C->capacity;
+        C->lenght = A->lenght;
         return C;
 }
-list ArrayList_Merge(list &A, list &B){
+/*list ArrayList_Merge(list &A, list &B){
     
     if (A->lenght == 0 && B->lenght == 0)
         return ArrayList_new(0);
@@ -78,11 +78,24 @@ list ArrayList_Merge(list &A, list &B){
     for(int i=0;i<A->lenght;i++)
         C->a[i] = A->a[i];
     int i = A->lenght;
-        for(int j=0;j<B->capacity; j++){
+        for(int j=0;j<B->lenght; j++){
         C->a[i] = B->a[j];
         i++;
         }
         C->lenght = C->capacity;
     return C;
 }
+*/
 
+list ArrayList_Merge(list &A, list &B){
+    list C = ArrayList_new(A->capacity + B->capacity);
+    C->lenght = A->lenght + B->lenght;
+    for (int i=0; i< A->lenght; i++)
+        C->a[i] = A->a[i];
+    int i = A->lenght;
+    for(int j=0;j<B->lenght; j++){
+        C->a[i] = B->a[j];
+        i++;
+    }
+    return C;
+}
